@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS conversation (
 );
 ```
 
-Cela va créer deux tables principales :
+Cela va créer deux tables :
 
 - **quote** : Contient les citations inspirantes.
 - **conversation** : Contient l'historique des conversations entre les utilisateurs et le chatbot.
@@ -87,28 +87,57 @@ Cela va créer deux tables principales :
 
 ### 1. API
 
-L'API fournit un unique endpoint.
+Dans le dossier `motivational-api` se trouve l'application fournissant L'API permettant de générer des citations aléatoires.
 
-- Obtenir une citation aléatoire
 `GET /getQuote` : Cette route renvoie une citation inspirante aléatoire à chaque appel.
+
+Lancer l'application et il sera possible de faire des appels avec postman avec l'url `http://localhost:8081/`
 
 ### 2. Le Chat
 
 L'application permet aussi à l'utilisateur d'engager une conversation avec le chatbot.
+Dans le dossier `motivational-chat` se trouve l'application de chat faisant appel à l'API. `(http://localhost:8080/)`
 
-- **Formulaire de conversation**:L'utilisateur peut envoyer un message et recevoir une réponse motivante du chatbot. Le message de l'utilisateur et la réponse du chatbot sont enregistrés dans la base de données.
+- **Formulaire de conversation** - `/conversation`: L'utilisateur peut envoyer un message et recevoir une réponse motivante du chatbot. Le message de l'utilisateur et la réponse du chatbot sont enregistrés dans la base de données.
 
-- **Consulter l'historique des conversations**: L'utilisateur peut consulter son historique de conversation en accédant à la page "Historique de conversation" sur l'interface du chat.
+- **Liste des utilisateurs** - `/users`: La liste des différents utilisateurs est retournée. Cliquer sur l'un des utilisateurs de la liste envoi vers la page d'historique de conversation pour cet utilisateur.
 
+- **Historiques de conversations** - `userConversation?username="user"` : Retourne l'historique de conversation pour l'utilisateur choisi, ici `user`.
+  
 ## Démarrage de l'application
 
 ### 1. Configuration des variables d'environnement
-Assurez-vous que les variables suivantes sont correctement configurées dans votre fichier `application.properties`:
+Assurez-vous que les variables suivantes sont correctement configurées dans vos fichiers `application.properties` pour `motivational-api` & `motivational-chat`:
+
+Pour `motivational-api`:
 
 ```bash
-spring.datasource.url=jdbc:mysql://localhost:3306/motivational_database
+spring.application.name=motivational-api
+
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/motivational_database
 spring.datasource.username=votre_utilisateur_mysql
 spring.datasource.password=votre_mot_de_passe_mysql
-spring.jpa.hibernate.ddl-auto=update
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+server.port=8081
 ```
+
+Pour `motivational-chat`:
+
+```bash
+spring.application.name=motivational-chat
+
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/motivational_database
+spring.datasource.username=votre_utilisateur_mysql
+spring.datasource.password=votre_mot_de_passe_mysql
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+```
+
+### 2. Lancement
+
+- L'API `motivational-api` est accessible via: `http://localhost:8081/getQuote`
+- Le chat `motivational-chat` est accessible via: `http://localhost:8080/conversation`
+
 
