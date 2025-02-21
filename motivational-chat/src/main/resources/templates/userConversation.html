@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique de conversation</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Historique de conversation de <span th:text="${username}"></span></h1>
+    
+	<div th:each="conversation : ${conversations}" class="conversation">
+        <div class="message user-message">
+			<span class="message-date" th:text="${#temporals.format(conversation.date, 'dd/MM/yyyy HH:mm')}"></span>
+            <strong><span th:text="${conversation.username}"></span> :</strong>
+            <p th:text="${conversation.message}"></p>
+        </div>
+        <div class="message chat-message">
+            <strong>Chat :</strong>
+            <p th:text="${conversation.response}"></p>
+        </div>
+     </div>
+
+    <a href="/users" class="return-to-users">Retour à la liste des utilisateurs</a>
+</body>
+</html>

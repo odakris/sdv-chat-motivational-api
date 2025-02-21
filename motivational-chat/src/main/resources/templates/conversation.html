@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de conversation</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Bienvenue sur le chat motivant !</h1>
+    
+    <form action="/sendMessage" method="post">
+        <label for="username">Pseudo :</label>
+        <input type="text" id="username" name="username" required><br>
+        
+        <label for="message">Votre message :</label>
+        <textarea id="message" name="message" required></textarea><br>
+        
+        <button type="submit">Envoyer</button>
+    </form>
+    
+    <h2>Conversation :</h2>
+    
+    <div class="conversation">
+        <div class="message user-message" th:if="${username != null && message != null}">
+			<strong><span th:text="${username}"></span> :</strong>
+            <p th:text="${message}"></p>
+        </div>
+        
+        <div class="message chat-message" th:if="${response != null}">
+            <strong>Chat :</strong>
+            <p th:text="${response}"></p>
+        </div>
+    </div>
+</body>
+</html>
