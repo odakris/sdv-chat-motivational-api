@@ -98,11 +98,11 @@ Lancer l'application et il sera possible de faire des appels avec postman avec l
 L'application permet aussi à l'utilisateur d'engager une conversation avec le chatbot.
 Dans le dossier `motivational-chat` se trouve l'application de chat faisant appel à l'API. `(http://localhost:8080/)`
 
-- **Formulaire de conversation** - `/conversation`: L'utilisateur peut envoyer un message et recevoir une réponse motivante du chatbot. Le message de l'utilisateur et la réponse du chatbot sont enregistrés dans la base de données.
+- **Formulaire de conversation** - `GET /conversation`: L'utilisateur peut envoyer un message et recevoir une réponse motivante du chatbot. Le message de l'utilisateur et la réponse du chatbot sont enregistrés dans la base de données.
 
-- **Liste des utilisateurs** - `/users`: La liste des différents utilisateurs est retournée. Cliquer sur l'un des utilisateurs de la liste envoi vers la page d'historique de conversation pour cet utilisateur.
+- **Liste des utilisateurs** - `GET /users`: La liste des différents utilisateurs est retournée. Cliquer sur l'un des utilisateurs de la liste envoi vers la page d'historique de conversation pour cet utilisateur.
 
-- **Historiques de conversations** - `/userConversation?username="user"` : Retourne l'historique de conversation pour l'utilisateur choisi, ici `user`.
+- **Historiques de conversations** - `GET /userConversation?username="user"` : Retourne l'historique de conversation pour l'utilisateur choisi, ici `user`.
   
 ## Démarrage de l'application
 
