@@ -102,7 +102,7 @@ Dans le dossier `motivational-chat` se trouve l'application de chat faisant appe
 
 - **Liste des utilisateurs** - `/users`: La liste des différents utilisateurs est retournée. Cliquer sur l'un des utilisateurs de la liste envoi vers la page d'historique de conversation pour cet utilisateur.
 
-- **Historiques de conversations** - `userConversation?username="user"` : Retourne l'historique de conversation pour l'utilisateur choisi, ici `user`.
+- **Historiques de conversations** - `/userConversation?username="user"` : Retourne l'historique de conversation pour l'utilisateur choisi, ici `user`.
   
 ## Démarrage de l'application
 
