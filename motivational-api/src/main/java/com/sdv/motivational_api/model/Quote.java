@@ -14,7 +14,7 @@ public class Quote {
 
 	private String quoteText;
 	
-	// CONSTURCTORS
+	// CONSTRUCTORS
 	public Quote() {
 		
 	}
