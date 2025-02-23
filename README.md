@@ -4,8 +4,8 @@
 
 Cette application se compose de deux parties principales :
 
-- L'**API** : Fournit des fonctionnalités pour récupérer des citations inspirantes et gérer les utilisateurs.
-- Le **Chat** : Permet aux utilisateurs d'interagir avec un chatbot motivant.
+- **L'API (motivational-api)** : Fournit des fonctionnalités pour récupérer des citations inspirantes et gérer les utilisateurs.
+- **Le Chat (motivational-chat)** : Permet aux utilisateurs d'interagir avec un chatbot motivant.
 L'objectif principal de l'application est d'encourager et de motiver les utilisateurs à travers des conversations et des citations inspirantes.
 
 ## Prérequis
@@ -16,6 +16,8 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur v
 - **Spring Boot** : Utilisé pour développer l'application API.
 - **MySQL** : Pour la gestion de la base de données.
 - **Thymeleaf** : Pour le rendu des pages HTML côté serveur.
+- **Maven** : pour la gestion des dépendances et du build)
+- **Postman** : pour tester l'API (optionnel)
 
 ## Installation
 
@@ -83,61 +85,78 @@ Cela va créer deux tables :
 - **quote** : Contient les citations inspirantes.
 - **conversation** : Contient l'historique des conversations entre les utilisateurs et le chatbot.
 
-## Utilisation de l'application
+### 3. Configuration des variables d'environnement
 
-### 1. API
+Dans application.properties de chaque module, configurez les paramètres de connexion `(username & password)` à la base de données :
 
-Dans le dossier `motivational-api` se trouve l'application fournissant L'API permettant de générer des citations aléatoires.
-
-`GET /getQuote` : Cette route renvoie une citation inspirante aléatoire à chaque appel.
-
-Lancer l'application et il sera possible de faire des appels avec postman avec l'url `http://localhost:8081/`
-
-### 2. Le Chat
-
-L'application permet aussi à l'utilisateur d'engager une conversation avec le chatbot.
-Dans le dossier `motivational-chat` se trouve l'application de chat faisant appel à l'API. `(http://localhost:8080/)`
-
-- **Formulaire de conversation** - `GET /conversation`: L'utilisateur peut envoyer un message et recevoir une réponse motivante du chatbot. Le message de l'utilisateur et la réponse du chatbot sont enregistrés dans la base de données.
-
-- **Liste des utilisateurs** - `GET /users`: La liste des différents utilisateurs est retournée. Cliquer sur l'un des utilisateurs de la liste envoi vers la page d'historique de conversation pour cet utilisateur.
-
-- **Historiques de conversations** - `GET /userConversation?username="user"` : Retourne l'historique de conversation pour l'utilisateur choisi, ici `user`.
-  
-## Démarrage de l'application
-
-### 1. Configuration des variables d'environnement
-Assurez-vous que les variables suivantes sont correctement configurées dans vos fichiers `application.properties` pour `motivational-api` & `motivational-chat`:
-
-Pour `motivational-api`:
-
-```bash
+motivational-api :
+```SQL
 spring.application.name=motivational-api
-
 spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/motivational_database
+spring.datasource.url=jdbc:mysql://localhost:3306/motivational_database
 spring.datasource.username=votre_utilisateur_mysql
 spring.datasource.password=votre_mot_de_passe_mysql
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
 server.port=8081
 ```
 
-Pour `motivational-chat`:
-
-```bash
+motivational-chat :
+```SQL
 spring.application.name=motivational-chat
-
 spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url=jdbc:mysql://${MYSQL_HOST:localhost}:3306/motivational_database
+spring.datasource.url=jdbc:mysql://localhost:3306/motivational_database
 spring.datasource.username=votre_utilisateur_mysql
 spring.datasource.password=votre_mot_de_passe_mysql
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+server.port=8080
 ```
 
-### 2. Lancement
+## Démarrage de l'application
 
-- L'API `motivational-api` est accessible via: `http://localhost:8081/getQuote`
-- Le chat `motivational-chat` est accessible via: `http://localhost:8080/conversation`
+### 1. Lancer motivational-api
+
+Dans le dossier `motivational-api` se trouve l'application fournissant L'API permettant de générer des citations aléatoires.
+
+Accédez au dossier motivational-api et exécutez :
+
+```bash
+mvn spring-boot:run
+```
+
+L'API sera disponible sur `http://localhost:8081/getQuote` via POSTMAN.
+
+### 2. Lancer motivational-chat
+
+Accédez au dossier motivational-chat et exécutez :
+
+```bash
+mvn spring-boot:run
+```
+
+L'application de chat sera accessible sur `http://localhost:8080/conversation`.
+
+## Fonctionnalités
+
+### 1. API
+
+L'API permet de récupérer des citations inspirantes via :
+
+- `**GET /getQuote**` : Retourne une citation motivante aléatoire.
+
+### 2. Chat Motivant
+
+- Conversation avec le chatbot : GET /conversation
+
+- Liste des utilisateurs : GET /users
+
+- Historique des conversations : GET /userConversation?username={user}
+
+## Tests avec Postman
+
+Vous pouvez tester les routes de l'API avec Postman en envoyant des requêtes aux endpoints :
+
+- http://localhost:8081/getQuote
+
+- http://localhost:8080/conversation
 
 
