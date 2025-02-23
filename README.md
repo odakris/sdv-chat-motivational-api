@@ -141,15 +141,15 @@ L'application de chat sera accessible sur `http://localhost:8080/conversation`.
 
 L'API permet de récupérer des citations inspirantes via :
 
-- `**GET /getQuote**` : Retourne une citation motivante aléatoire.
+- **`GET /getQuote`** : Retourne une citation motivante aléatoire.
 
 ### 2. Chat Motivant
 
-- Conversation avec le chatbot : GET /conversation
+- Conversation avec le chatbot : **`GET /conversation`**
 
-- Liste des utilisateurs : GET /users
+- Liste des utilisateurs : **`GET /users`**
 
-- Historique des conversations : GET /userConversation?username={user}
+- Historique des conversations : **`GET /userConversation?username={user}`**
 
 ## Tests avec Postman
 
