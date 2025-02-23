@@ -117,7 +117,7 @@ server.port=8080
 
 Dans le dossier `motivational-api` se trouve l'application fournissant L'API permettant de générer des citations aléatoires.
 
-Accédez au dossier motivational-api et exécutez :
+Accédez au dossier `motivational-api` et exécutez :
 
 ```bash
 mvn spring-boot:run
@@ -126,8 +126,10 @@ mvn spring-boot:run
 L'API sera disponible sur `http://localhost:8081/getQuote` via POSTMAN.
 
 ### 2. Lancer motivational-chat
+L'application permet aussi à l'utilisateur d'engager une conversation avec le chatbot.
+Dans le dossier `motivational-chat` se trouve l'application de chat faisant appel à l'API.
 
-Accédez au dossier motivational-chat et exécutez :
+Accédez au dossier `motivational-chat` et exécutez :
 
 ```bash
 mvn spring-boot:run
